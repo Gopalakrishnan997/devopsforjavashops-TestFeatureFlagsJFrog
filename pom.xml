@@ -64,6 +64,8 @@
     <enabled>true</enabled>
   </snapshots>
 </repository>
+	</distributionManagement>
+<repositories>
 <repository>
   <id>test</id>
   <url>https://pkgs.dev.azure.com/gkinfrastructureascode/java-springboot-maven/_packaging/test/maven/v1</url>
@@ -74,7 +76,7 @@
     <enabled>true</enabled>
   </snapshots>
 </repository>
-</distributionManagement>
+</repositories>
 
 	<build>
 		<plugins>
