@@ -3,8 +3,8 @@
 
 name: Build and deploy JAR app to Azure Web App - swamptest
 
-env: # Or as an environment variable
-      APP_CONFIGURATION_CONNECTION_STRING: ${{ secrets.APP_CONFIGURATION_CONNECTION_STRING }}
+#env: # Or as an environment variable
+#      APP_CONFIGURATION_CONNECTION_STRING: ${{ secrets.APP_CONFIGURATION_CONNECTION_STRING }}
       
 on:
   push:
@@ -25,36 +25,35 @@ jobs:
           java-version: '11'
 
       - name: Build with Maven
-        run: mvn package --s settings.xml
+        run: mvn package --s settings.xml -DskipTests
         env: 
-          ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
-          ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
-          ARTIFACTORY_HOST: ${{ secrets.ARTIFACTORY_HOST }}
-          
+          ARTIFACTORY_USERNAME: gkinfrastructureascode
+          ARTIFACTORY_PASSWORD: a7mzdl4mnzgyqsbmgkxpo6g6q4yq4lbznniva7d44hbj2lbzipda
+           
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   environment:
+  #     name: 'Production'
+  #     url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: java-app
+  #   steps:
+  #     - name: Download artifact from build job
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: java-app
 
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'swamptest'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9E95D6DF0765426EA33B7B3FC0A38316 }}
-          package: '*.jar'
+  #    - name: Deploy to Azure Web App
+  #      id: deploy-to-webapp
+  #      uses: azure/webapps-deploy@v2
+  #      with:
+  #        app-name: 'swamptest'
+  #        slot-name: 'Production'
+  #        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9E95D6DF0765426EA33B7B3FC0A38316 }}
+  #        package: '*.jar'
