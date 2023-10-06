@@ -27,9 +27,8 @@ jobs:
     - name: Build with Maven
       run: mvn package --s settings.xml
       env: 
-          ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
-          ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
-          ARTIFACTORY_HOST: ${{ secrets.ARTIFACTORY_HOST }}
+          ARTIFACTORY_USERNAME: gkinfrastructureascode
+          ARTIFACTORY_PASSWORD: a7mzdl4mnzgyqsbmgkxpo6g6q4yq4lbznniva7d44hbj2lbzipda
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
