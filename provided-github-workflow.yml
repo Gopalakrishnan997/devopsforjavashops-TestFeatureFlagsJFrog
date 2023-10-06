@@ -3,8 +3,8 @@ Working GitHub Action: # Docs for the Azure Web Apps Deploy action: https://gith
 
 name: Build and deploy JAR app to Azure Web App - <your web app name here>
 
-env: # Or as an environment variable
-      APP_CONFIGURATION_CONNECTION_STRING: ${{ secrets.APP_CONFIGURATION_CONNECTION_STRING }}
+#env: # Or as an environment variable
+#      APP_CONFIGURATION_CONNECTION_STRING: ${{ secrets.APP_CONFIGURATION_CONNECTION_STRING }}
 
 on:
   push:
@@ -30,11 +30,11 @@ jobs:
           ARTIFACTORY_USERNAME: gkinfrastructureascode
           ARTIFACTORY_PASSWORD: a7mzdl4mnzgyqsbmgkxpo6g6q4yq4lbznniva7d44hbj2lbzipda
 
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: '<your web app name here>'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_8cbbe98132394af1a139a3f9d4ce8345 }}
-        package: '${{ github.workspace }}/target/*.jar'
+#    - name: Deploy to Azure Web App
+#      uses: azure/webapps-deploy@v2
+#      with:
+#        app-name: '<your web app name here>'
+#        slot-name: 'production'
+#        publish-profile: ${{ secrets.AzureAppService_PublishProfile_8cbbe98132394af1a139a3f9d4ce8345 }}
+#        package: '${{ github.workspace }}/target/*.jar'
 © 2021 GitHub, Inc.
